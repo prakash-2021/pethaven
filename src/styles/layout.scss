@@ -1,0 +1,40 @@
+@use "./functions.scss";
+
+.ph {
+  &-container {
+    @apply w-full px-4;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0 functions.rem(16px);
+
+    @media (min-width: 640px) {
+      padding: 0 functions.rem(20px);
+      max-width: functions.rem(640px);
+    }
+
+    @media (min-width: 768px) {
+      padding: 0 functions.rem(20px);
+      max-width: functions.rem(720px);
+    }
+
+    @media (min-width: 1024px) {
+      padding: 0 functions.rem(20px);
+      max-width: functions.rem(896px);
+    }
+
+    @media (min-width: 1280px) {
+      padding: 0 functions.rem(40px);
+      // max-width: functions.rem(1200px);
+      max-width: 100%;
+    }
+
+    @media (min-width: 1440px) {
+      max-width: functions.rem(1312px);
+      padding: 0;
+    }
+
+    @media (min-width: 1680px) {
+      max-width: functions.rem(1440px);
+    }
+  }
+}

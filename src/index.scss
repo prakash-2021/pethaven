@@ -1,7 +1,9 @@
-@import "tailwindcss";
+@import "../src/styles/main.scss";
 
 body {
   font-family: "DM Sans", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+  background-color: #f9f2ea;
+  color: #154c7e;
 }

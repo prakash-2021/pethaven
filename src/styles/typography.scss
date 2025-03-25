@@ -1,1 +1,32 @@
+@use "./functions.scss";
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
+.ph {
+  &-heading--one {
+    font-size: functions.rem(84);
+    font-weight: 500;
+    line-height: 130%;
+  }
+
+  &-heading--three {
+    font-size: functions.rem(36);
+    font-weight: 700;
+  }
+
+  &-text-large {
+    font-size: functions.rem(18);
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  &-body--medium {
+    font-size: functions.rem(28);
+    font-weight: normal;
+  }
+
+  &-body--small {
+    font-size: functions.rem(18);
+    font-weight: normal;
+  }
+}

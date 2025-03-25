@@ -1,0 +1,58 @@
+@use "../../styles/main.scss";
+
+.button {
+  height: main.rem(60px);
+  padding: main.rem(18px) main.rem(26px);
+  background-color: #f9f2ea;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #154c7e;
+  box-shadow: 7px 6px 0px #154c7e;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  left: 0;
+
+  span {
+    font-size: main.rem(18px);
+    font-weight: 600;
+    // text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:hover {
+    background-color: rgba(21, 76, 126, 0.05);
+    box-shadow: 5px 4px 0px #154c7e;
+    transform: translate(2px, 2px);
+
+    span {
+      transform: scale(1.02);
+    }
+  }
+
+  &:active {
+    box-shadow: 2px 2px 0px #154c7e;
+    transform: translate(5px, 4px);
+  }
+}
+
+.secondary {
+  border: 2px solid #f16849;
+  box-shadow: 7px 6px 0px #f16849;
+
+  span {
+    color: #f16849;
+  }
+
+  &:hover {
+    background-color: rgb(255, 233, 233);
+    box-shadow: 5px 4px 0px #f58970;
+  }
+
+  &:active {
+    box-shadow: 2px 2px 0px #f16849;
+  }
+}
