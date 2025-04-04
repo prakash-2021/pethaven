@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import Footer from "./Footer";
 import { Header } from "./Header";
 
 const Layout = () => {
@@ -9,6 +10,8 @@ const Layout = () => {
         <Outlet />{" "}
         {/* This will render the child components (Home, About, etc.) */}
       </main>
+
+      <Footer />
     </>
   );
 };

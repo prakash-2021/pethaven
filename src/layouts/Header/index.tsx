@@ -8,8 +8,12 @@ export const Header = () => {
         <div className={styles.header}>
           <nav className="flex items-center justify-between w-full">
             <div className="flex items-center gap-14">
-              <a className="ph-text-large">Home</a>
-              <a className="ph-text-large">Get pet</a>
+              <a className="ph-text-large" href="/">
+                Home
+              </a>
+              <a className="ph-text-large" href="/pets">
+                Get pet
+              </a>
             </div>
 
             <img src="/Logo.svg" alt="logo" />

@@ -20,6 +20,11 @@
     text-transform: uppercase;
   }
 
+  &-text-x-large {
+    font-size: functions.rem(20);
+    font-weight: bold;
+  }
+
   &-body--medium {
     font-size: functions.rem(28);
     font-weight: normal;
