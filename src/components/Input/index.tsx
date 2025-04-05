@@ -22,11 +22,7 @@ export const TextInput = ({
   return (
     <div className="text-left w-full">
       <div className={twMerge(styles.input, errorMessage && styles.error)}>
-        {label && (
-          <label className="cnc-body--md text-white uppercase font-medium">
-            {label}
-          </label>
-        )}
+        {!!label && <label className="font-medium">{label}</label>}
         <input
           type={type}
           placeholder={placeholder}

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "../../components";
 import styles from "./index.module.scss";
 
@@ -8,21 +9,23 @@ export const Header = () => {
         <div className={styles.header}>
           <nav className="flex items-center justify-between w-full">
             <div className="flex items-center gap-14">
-              <a className="ph-text-large" href="/">
+              <Link className="ph-text-large" to="/">
                 Home
-              </a>
-              <a className="ph-text-large" href="/pets">
+              </Link>
+              <Link className="ph-text-large" to="/pets">
                 Get pet
-              </a>
+              </Link>
             </div>
 
             <img src="/Logo.svg" alt="logo" />
 
             <div className="flex items-center gap-14">
-              <a className="ph-text-large">Log in</a>
-              <a className="ph-text-large">
+              <Link className="ph-text-large" to="/login">
+                Log in
+              </Link>
+              <Link className="ph-text-large" to={""}>
                 <Button label="Adopt" />
-              </a>
+              </Link>
             </div>
           </nav>
         </div>

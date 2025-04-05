@@ -39,6 +39,11 @@
   }
 }
 
+.small {
+  height: main.rem(40px);
+  padding: main.rem(12px) main.rem(20px);
+}
+
 .secondary {
   border: 2px solid #f16849;
   box-shadow: 7px 6px 0px #f16849;

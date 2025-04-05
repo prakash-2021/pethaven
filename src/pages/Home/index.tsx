@@ -1,11 +1,14 @@
+import { useState } from "react";
 import { BsStars } from "react-icons/bs";
 import { FaArrowRight } from "react-icons/fa6";
 import { PiDotsNineBold } from "react-icons/pi";
 import { twMerge } from "tailwind-merge";
-import { Button, CTA, PetCard } from "../../components";
+import { Button, CTA, PetCard, QuizModal } from "../../components";
 import styles from "./index.module.scss";
 
 const Home = () => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <main className="mt-14">
       <div className="ph-container">
@@ -119,12 +122,18 @@ const Home = () => {
                 </div>
               }
               variant="secondary"
+              onClick={() => setShowModal(true)}
             />
           </div>
         </div>
       </section>
 
       <CTA />
+
+      <QuizModal
+        handleClose={() => setShowModal(false)}
+        isModalOpen={showModal}
+      />
     </main>
   );
 };
