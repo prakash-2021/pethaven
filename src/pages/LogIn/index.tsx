@@ -1,4 +1,4 @@
-import { Button, TextInput } from "../../components";
+import { Button, ScrollToTop, TextInput } from "../../components";
 
 export const Login = () => {
   return (
@@ -22,6 +22,8 @@ export const Login = () => {
 
         <Button label="Login" classNames="mx-auto" variant="secondary" />
       </div>
+
+      <ScrollToTop />
     </section>
   );
 };

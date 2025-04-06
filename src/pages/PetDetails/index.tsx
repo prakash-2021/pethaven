@@ -11,8 +11,10 @@ import {
   useRef,
   useState,
 } from "react";
+import { useParams } from "react-router-dom";
 import { useWindowSize } from "usehooks-ts";
-import { Button, CTA, PetCardSlider } from "../../components";
+import { Button, CTA, PetCardSlider, ScrollToTop } from "../../components";
+import { useGetPet } from "./queries";
 
 function ThumbnailPlugin(
   mainRef: MutableRefObject<KeenSliderInstance | null>
@@ -125,6 +127,10 @@ const PetDetails = () => {
     };
   }, [handleResize]);
 
+  const { id } = useParams();
+
+  const { data } = useGetPet(id || "");
+
   return (
     <main className="mt-14">
       <section className="mb-16">
@@ -136,11 +142,11 @@ const PetDetails = () => {
                 ref={sliderRef}
                 className="keen-slider shadow-md rounded-xl overflow-hidden"
               >
-                {[...Array(5)].map((_, idx) => (
+                {data?.images.map((pet, idx) => (
                   <div key={idx} className="keen-slider__slide">
                     <figure className="ph-figure pt-[50%] relative">
                       <img
-                        src="/dog.webp"
+                        src={pet}
                         className="ph-image rounded-md shadow-md"
                       />
                     </figure>
@@ -153,10 +159,10 @@ const PetDetails = () => {
                 ref={thumbnailRef}
                 className="keen-slider thumbnail mt-4 flex gap-2"
               >
-                {[...Array(5)].map((_, idx) => (
+                {data?.images.map((pet, idx) => (
                   <div
                     key={idx}
-                    className={`keen-slider__slide cursor-pointer transition-all duration-300 rounded-lg overflow-hidden ${
+                    className={`keen-slider__slide cursor-pointer transition-all duration-300 rounded-lg overflow-hidden max-w-[100px] ${
                       currentIndex === idx
                         ? "border-2 border-[#f16849]"
                         : "border border-gray-300"
@@ -164,7 +170,7 @@ const PetDetails = () => {
                   >
                     <figure className="ph-figure pt-[100%]">
                       <img
-                        src="/dog.webp"
+                        src={pet}
                         className="ph-image rounded-md duration-200 hover:scale-105"
                       />
                     </figure>
@@ -174,15 +180,10 @@ const PetDetails = () => {
             </div>
 
             <div className="col-span-3">
-              <h2 className="ph-heading--three text-">Pepsi</h2>
-              <div className="mb-4 text-[#f16849]">Bhote kukur</div>
-              <div className="ph-text-x-large mb-4">3 Years Old</div>
-              <p>
-                {" "}
-                Only a limited number of each minymon will be released. You can
-                see which pets are up for adoption now, or contact our team to
-                design a custom minymon.
-              </p>
+              <h2 className="ph-heading--three text-">{data?.name}</h2>
+              <div className="mb-4 text-[#f16849]">{data?.breed}</div>
+              <div className="ph-text-x-large mb-4">{data?.age} Years Old</div>
+              <p>{data?.healthStatus}</p>
 
               <Button label="Adopt Now" variant="primary" classNames="mt-10" />
             </div>
@@ -246,6 +247,8 @@ const PetDetails = () => {
       </section>
 
       <CTA />
+
+      <ScrollToTop />
     </main>
   );
 };

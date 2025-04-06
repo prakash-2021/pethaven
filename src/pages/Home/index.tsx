@@ -2,12 +2,16 @@ import { useState } from "react";
 import { BsStars } from "react-icons/bs";
 import { FaArrowRight } from "react-icons/fa6";
 import { PiDotsNineBold } from "react-icons/pi";
+import { Link } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
-import { Button, CTA, PetCard, QuizModal } from "../../components";
+import { Button, CTA, PetCard, QuizModal, ScrollToTop } from "../../components";
+import { useGetAllPets } from "../Pet/queries";
 import styles from "./index.module.scss";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
+
+  const { data } = useGetAllPets(1, 6);
 
   return (
     <main className="mt-14">
@@ -46,15 +50,25 @@ const Home = () => {
         )}
       >
         <div className="flex justify-center gap-24 mb-10">
-          <PetCard image="/dog.webp" name="Pepsi" />
-          <PetCard image="/dog.webp" name="Pepsi" />
-          <PetCard image="/dog.webp" name="Pepsi" />
+          {data?.pets.slice(0, 3).map((pet) => (
+            <PetCard
+              image={pet.images[0]}
+              name={pet.name}
+              key={pet.petId}
+              id={pet.petId}
+            />
+          ))}
         </div>
 
         <div className="flex justify-center gap-24">
-          <PetCard image="/dog.webp" name="Pepsi" />
-          <PetCard image="/dog.webp" name="Pepsi" />
-          <PetCard image="/dog.webp" name="Pepsi" />
+          {data?.pets.slice(3, 6).map((pet) => (
+            <PetCard
+              image={pet.images[0]}
+              name={pet.name}
+              key={pet.petId}
+              id={pet.petId}
+            />
+          ))}
         </div>
       </section>
 
@@ -71,32 +85,36 @@ const Home = () => {
           </p>
 
           <div className="flex items-center gap-6 mb-16">
-            <img src="/home/dog1.png" alt="" />
-            <img src="/home/dog1.png" alt="" />
-            <img src="/home/dog1.png" alt="" />
-            <img src="/home/dog1.png" alt="" />
+            <img src="/home/dog1.png" alt="" className="max-w-[300px]" />
+            <img src="/home/dog3.png" alt="" className="max-w-[230px]" />
+            <img src="/home/cat4.png" alt="" className="max-w-[200px]" />
+            <img src="/home/dog4.png" alt="" className="max-w-[140px]" />
           </div>
 
           <div className="flex gap-10 justify-center">
-            <Button
-              label={
-                <div className="flex items-center gap-2">
-                  <PiDotsNineBold size={20} />
-                  <span>See Available Pet</span>
-                </div>
-              }
-              variant="secondary"
-            />
+            <Link to={"/pets"}>
+              <Button
+                label={
+                  <div className="flex items-center gap-2">
+                    <PiDotsNineBold size={20} />
+                    <span>See Available Pet</span>
+                  </div>
+                }
+                variant="secondary"
+              />
+            </Link>
 
-            <Button
-              label={
-                <div className="flex items-center gap-2">
-                  <BsStars size={20} />
-                  <span>See Pet stories</span>
-                </div>
-              }
-              variant="secondary"
-            />
+            <Link to={"/stories"}>
+              <Button
+                label={
+                  <div className="flex items-center gap-2">
+                    <BsStars size={20} />
+                    <span>See Pet stories</span>
+                  </div>
+                }
+                variant="secondary"
+              />
+            </Link>
           </div>
         </div>
       </section>
@@ -108,9 +126,11 @@ const Home = () => {
           </h2>
 
           <p className="ph-body--small max-w-[800px] mb-16 text-center mx-auto">
-            Only a limited number of each minymon will be released. You can see
-            which pets are up for adoption now, or contact our team to design a
-            custom minymon.
+            Finding the perfect pet can be tricky, but we’re here to guide you!
+            Take our quiz to discover a pet that matches your lifestyle, energy
+            levels, and home environment. Whether you're looking for an active
+            companion or a relaxed cuddle buddy, we’ll help you find the ideal
+            furry friend!
           </p>
 
           <div className="flex justify-center">
@@ -134,6 +154,8 @@ const Home = () => {
         handleClose={() => setShowModal(false)}
         isModalOpen={showModal}
       />
+
+      <ScrollToTop />
     </main>
   );
 };

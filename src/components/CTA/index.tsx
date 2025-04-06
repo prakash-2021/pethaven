@@ -9,13 +9,14 @@ export const CTA = () => {
           <div className="col-span-8 col-start-3 bg-[#FFCDC1] py-24 rounded-2xl">
             <div className="flex flex-col items-center">
               <h2 className="ph-heading--three mb-6 text-center">
-                Get notified when new pet are released
+                Get notified when new pets are available
               </h2>
 
-              <p className="ph-body--small max-w-[800px] mb-16 text-center mx-auto">
-                New pets are released periodically in small batches, so the best
-                way to get ahold of one is to watch out for our email
-                newsletter.
+              <p className="ph-body--small max-w-[700px] mb-8 text-center mx-auto">
+                New pets are released in limited batches, and they tend to go
+                fast! Stay in the loop by subscribing to our email newsletter —
+                be the first to know when adorable new pets are available for
+                adoption.
               </p>
 
               <div className="max-w-[468px] mx-auto mb-12 w-full">

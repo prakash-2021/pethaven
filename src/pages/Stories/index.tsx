@@ -1,4 +1,4 @@
-import { Button, CTA } from "../../components";
+import { Button, CTA, ScrollToTop } from "../../components";
 
 const Stories = () => {
   return (
@@ -20,7 +20,7 @@ const Stories = () => {
                 </div>
 
                 <figure className="ph-figure pt-[80%] mb-5">
-                  <img src="/dog.webp" alt="" className="ph-image" />
+                  <img src="/pets/dog.png" alt="" className="ph-image" />
                 </figure>
 
                 <p>
@@ -61,14 +61,14 @@ const Stories = () => {
                     <figure className="ph-figure w-8 h-8 rounded-full">
                       <img src="/dog.webp" alt="" className="ph-image" />
                     </figure>
-                    <span className="underline">Prakash Shrestha</span>
+                    <span className="underline">Aryan Shrestha</span>
                   </div>
                   <span className="w-1 h-1 rounded-full bg-gray-400"></span>
-                  <span>9h</span>
+                  <span>7h</span>
                 </div>
 
                 <figure className="ph-figure pt-[80%] mb-5">
-                  <img src="/dog.webp" alt="" className="ph-image" />
+                  <img src="/pets/cat3.png" alt="" className="ph-image" />
                 </figure>
 
                 <p>
@@ -86,6 +86,8 @@ const Stories = () => {
       </section>
 
       <CTA />
+
+      <ScrollToTop />
     </main>
   );
 };
