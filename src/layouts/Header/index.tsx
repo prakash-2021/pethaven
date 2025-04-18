@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import { Button } from "../../components";
+import { useGetProfile } from "../../pages/Signup/queries";
+import { useLocalStorageState } from "../../utils/use-localstorage";
 import styles from "./index.module.scss";
 
 export const Header = () => {
+  const token = useLocalStorageState("token");
+
+  const { data } = useGetProfile(token || "");
+
   return (
     <header>
       <div className="ph-container">
@@ -20,9 +26,15 @@ export const Header = () => {
             <img src="/Logo.svg" alt="logo" />
 
             <div className="flex items-center gap-14">
-              <Link className="ph-text-large" to="/login">
-                Log in
-              </Link>
+              {data ? (
+                <Link className="ph-text-large" to="/profile">
+                  Profile
+                </Link>
+              ) : (
+                <Link className="ph-text-large" to="/login">
+                  Log in
+                </Link>
+              )}
               <Link className="ph-text-large" to={""}>
                 <Button label="Adopt" />
               </Link>

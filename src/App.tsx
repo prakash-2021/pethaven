@@ -5,7 +5,10 @@ import Home from "./pages/Home";
 import { Login } from "./pages/LogIn";
 import Pet from "./pages/Pet";
 import PetDetails from "./pages/PetDetails";
+import { Profile } from "./pages/Profile";
+import { SignUp } from "./pages/Signup";
 import Stories from "./pages/Stories";
+import { VerifyEmail } from "./pages/VerifyEmail";
 
 function App() {
   return (
@@ -17,7 +20,10 @@ function App() {
           <Route path="/pets" element={<Pet />} />
           <Route path="/pets/:id" element={<PetDetails />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/stories" element={<Stories />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
     </Router>

@@ -1,13 +1,13 @@
-import React, { ReactNode } from "react";
+import React, { InputHTMLAttributes, ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 import styles from "./index.module.scss";
 
-interface Input {
+interface Input extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   placeholder: string;
   type: string;
   inputProps?: React.HTMLProps<HTMLInputElement>;
-  errorMessage?: string;
+  error?: string;
   endIcon?: ReactNode;
 }
 
@@ -16,22 +16,26 @@ export const TextInput = ({
   placeholder,
   type,
   inputProps,
-  errorMessage,
+  error,
   endIcon,
+  ...InputProps
 }: Input) => {
   return (
     <div className="text-left w-full">
-      <div className={twMerge(styles.input, errorMessage && styles.error)}>
+      <div className={twMerge(styles.input, error && styles.error)}>
         {!!label && <label className="font-medium">{label}</label>}
         <input
           type={type}
           placeholder={placeholder}
           {...inputProps}
           onWheel={(e) => e.currentTarget.blur()}
+          {...InputProps}
         />
         {endIcon && <span className={styles.endIcon}>{endIcon}</span>}
       </div>
-      {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
+      {error && (
+        <p className={twMerge(styles.error, styles.errorMessage)}>{error}</p>
+      )}
     </div>
   );
 };

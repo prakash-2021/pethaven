@@ -28,4 +28,5 @@ export interface Pet {
   adoptionStatus: string;
   addedAt: Date;
   images: string[];
+  petId: string;
 }

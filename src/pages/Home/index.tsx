@@ -30,16 +30,17 @@ const Home = () => {
               giving stray dogs a chance for a better life!" 🐾❤️
             </p>
           </div>
-
-          <Button
-            label={
-              <div className="flex items-center gap-5">
-                <span>Adopt you pet</span>
-                <FaArrowRight color="#154C7E" size={20} />
-              </div>
-            }
-            classNames="mx-auto"
-          />
+          <a href={"/#quiz"}>
+            <Button
+              label={
+                <div className="flex items-center gap-5">
+                  <span>Adopt your pet</span>
+                  <FaArrowRight color="#154C7E" size={20} />
+                </div>
+              }
+              classNames="mx-auto"
+            />
+          </a>
         </section>
       </div>
 
@@ -84,11 +85,19 @@ const Home = () => {
             custom minymon.
           </p>
 
-          <div className="flex items-center gap-6 mb-16">
-            <img src="/home/dog1.png" alt="" className="max-w-[300px]" />
-            <img src="/home/dog3.png" alt="" className="max-w-[230px]" />
-            <img src="/home/cat4.png" alt="" className="max-w-[200px]" />
-            <img src="/home/dog4.png" alt="" className="max-w-[140px]" />
+          <div className="grid grid-cols-4 items-center gap-6 mb-16">
+            <figure className="flex items-center justify-center">
+              <img src="/home/dog1.png" alt="" className="max-w-[300px]" />
+            </figure>
+            <figure className="flex items-center justify-center">
+              <img src="/home/dog3.png" alt="" className="max-w-[230px]" />
+            </figure>
+            <figure className="flex items-center justify-center">
+              <img src="/home/cat4.png" alt="" className="max-w-[180px]" />
+            </figure>
+            <figure className="flex items-center justify-center">
+              <img src="/home/dog4.png" alt="" className="max-w-[130px]" />
+            </figure>
           </div>
 
           <div className="flex gap-10 justify-center">
@@ -119,7 +128,10 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="flex flex-col items-center mb-24 bg-[#CAE5E0] py-24">
+      <section
+        className="flex flex-col items-center mb-24 bg-[#CAE5E0] py-24"
+        id="quiz"
+      >
         <div className="ph-container">
           <h2 className="ph-heading--three mb-6 text-center">
             Have an confusion choosing pet?

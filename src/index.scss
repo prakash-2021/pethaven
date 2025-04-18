@@ -1,5 +1,10 @@
 @import "../src/styles/main.scss";
 
+* {
+  scroll-behavior: smooth;
+  scroll-padding-top: 12px;
+}
+
 body {
   font-family: "DM Sans", sans-serif;
   font-optical-sizing: auto;
