@@ -1,0 +1,30 @@
+@use "../../styles/main.scss";
+
+input,
+select {
+  background-color: transparent;
+  width: 100%;
+  height: main.rem(64px);
+  outline: none;
+  border: none;
+  color: #154c7e;
+  font-size: main.rem(20px);
+  line-height: 110%;
+  border-bottom: 2px solid #154b7e56;
+  transition: border-color 0.15s ease;
+
+  @media (max-width: 1440px) {
+    height: main.rem(56px);
+    font-size: main.rem(17px);
+    line-height: 140%;
+  }
+
+  &:hover,
+  &:focus {
+    border-color: #154c7e;
+  }
+
+  &::placeholder {
+    color: #154b7e64;
+  }
+}

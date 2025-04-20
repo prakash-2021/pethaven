@@ -27,7 +27,7 @@ const Home = () => {
           <div className="max-w-[56rem] mx-auto mb-12">
             <p className="ph-body--medium">
               "PetHaven - Connecting loving homes with pets in need, while
-              giving stray dogs a chance for a better life!" 🐾❤️
+              giving stray dogs a chance for a better life!" 🐾
             </p>
           </div>
           <a href={"/#quiz"}>
@@ -57,6 +57,7 @@ const Home = () => {
               name={pet.name}
               key={pet.petId}
               id={pet.petId}
+              status={pet.adoptionStatus}
             />
           ))}
         </div>

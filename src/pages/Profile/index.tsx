@@ -1,6 +1,8 @@
 import dayjs from "dayjs";
+import { BiExit } from "react-icons/bi";
 import { FaImages } from "react-icons/fa6";
 import { MdOutlineMenuBook } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../../components";
 import { useLocalStorageState } from "../../utils/use-localstorage";
 import { useGetProfile } from "../Signup/queries";
@@ -9,6 +11,8 @@ export const Profile = () => {
   const token = useLocalStorageState("token");
 
   const { data } = useGetProfile(token || "");
+
+  const navigate = useNavigate();
 
   return (
     <section className="mt-14 mb-20">
@@ -53,18 +57,32 @@ export const Profile = () => {
                   </p>
                 </div>
               </div>
+            </div>
+            <div className="flex gap-8 w-full mt-8">
+              <Button
+                label={
+                  <div className="flex items-center gap-3">
+                    <FaImages size={20} />
+                    <span>Upload your image</span>
+                  </div>
+                }
+                variant="primary"
+              />
 
-              <div className="">
-                <Button
-                  label={
-                    <div className="flex items-center gap-3">
-                      <FaImages size={20} />
-                      <span>Upload your image</span>
-                    </div>
-                  }
-                  variant="primary"
-                />
-              </div>
+              <Button
+                label={
+                  <div className="flex items-center gap-3">
+                    <BiExit size={20} />
+                    <span>Log out</span>
+                  </div>
+                }
+                variant="secondary"
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  navigate("/");
+                  window.location.reload();
+                }}
+              />
             </div>
           </div>
         </div>

@@ -200,17 +200,25 @@ const PetDetails = () => {
             </div>
 
             <div className="col-span-3">
-              <h2 className="ph-heading--three text-">{data?.name}</h2>
+              <h2 className="ph-heading--three">{data?.name}</h2>
               <div className="mb-4 text-[#f16849]">{data?.breed}</div>
               <div className="ph-text-x-large mb-4">{data?.age} Years Old</div>
               <p>{data?.healthStatus}</p>
 
-              <Button
-                label="Adopt Now"
-                variant="primary"
-                classNames="mt-10"
-                onClick={() => setShowModal(true)}
-              />
+              {data?.adoptionStatus === "AVAILABLE" ? (
+                <Button
+                  label="Adopt Now"
+                  variant="primary"
+                  classNames="mt-10"
+                  onClick={() => setShowModal(true)}
+                />
+              ) : (
+                <Button
+                  label="Adopted"
+                  variant="primary"
+                  classNames="mt-10 pointer-events-none cursor-not-allowed"
+                />
+              )}
             </div>
           </div>
         </div>

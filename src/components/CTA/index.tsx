@@ -1,41 +1,63 @@
-import { FaArrowRight } from "react-icons/fa6";
-import { Button, TextInput } from "../../components";
+import { useState } from "react";
+import styles from "./index.module.scss";
+
+const faqData = [
+  {
+    question: "What is petHaven?",
+    answer:
+      "petHaven is a platform where you can adopt pets, report strays, and share adoption stories.",
+  },
+  {
+    question: "How do I adopt a pet?",
+    answer:
+      "Take our pet quiz to get matched with a pet that suits your lifestyle, then fill out the adoption form.",
+  },
+  {
+    question: "Can I report a stray animal?",
+    answer:
+      "Yes, you can report stray animals through our report section, and nearby shelters will be notified.",
+  },
+];
 
 export const CTA = () => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const toggle = (index: number) => {
+    setActiveIndex((prev) => (prev === index ? null : index));
+  };
+
   return (
-    <section className="mb-24">
-      <div className="ph-container">
-        <div className="grid grid-cols-12">
-          <div className="col-span-8 col-start-3 bg-[#FFCDC1] py-24 rounded-2xl">
-            <div className="flex flex-col items-center">
-              <h2 className="ph-heading--three mb-6 text-center">
-                Get notified when new pets are available
-              </h2>
-
-              <p className="ph-body--small max-w-[700px] mb-8 text-center mx-auto">
-                New pets are released in limited batches, and they tend to go
-                fast! Stay in the loop by subscribing to our email newsletter —
-                be the first to know when adorable new pets are available for
-                adoption.
-              </p>
-
-              <div className="max-w-[468px] mx-auto mb-12 w-full">
-                <TextInput placeholder="Enter your email here" type="email" />
+    <div className="ph-container">
+      <div className={styles.faq}>
+        <h2 className={`ph-heading--three ${styles.title}`}>FAQs</h2>
+        <div className={styles.items}>
+          {faqData.map((item, index) => (
+            <div key={index} className={styles.item}>
+              <button
+                className={styles.question}
+                onClick={() => toggle(index)}
+                aria-expanded={activeIndex === index}
+              >
+                {item.question}
+                <span
+                  className={`${styles.icon} ${
+                    activeIndex === index ? styles.rotate : ""
+                  }`}
+                >
+                  ▼
+                </span>
+              </button>
+              <div
+                className={`${styles.answerWrapper} ${
+                  activeIndex === index ? styles.open : ""
+                }`}
+              >
+                <div className={styles.answer}>{item.answer}</div>
               </div>
-
-              <Button
-                label={
-                  <div className="flex items-center gap-2">
-                    <span>Sign up</span>
-                    <FaArrowRight size={20} />
-                  </div>
-                }
-                variant="secondary"
-              />
             </div>
-          </div>
+          ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };

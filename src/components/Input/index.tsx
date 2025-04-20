@@ -22,15 +22,23 @@ export const TextInput = ({
 }: Input) => {
   return (
     <div className="text-left w-full">
-      <div className={twMerge(styles.input, error && styles.error)}>
-        {!!label && <label className="font-medium">{label}</label>}
-        <input
-          type={type}
-          placeholder={placeholder}
-          {...inputProps}
-          onWheel={(e) => e.currentTarget.blur()}
-          {...InputProps}
-        />
+      <div
+        className={twMerge(
+          styles.input,
+          error && styles.error,
+          endIcon && "pr-5"
+        )}
+      >
+        <div className="w-full">
+          {!!label && <label className="font-medium">{label}</label>}
+          <input
+            type={type}
+            placeholder={placeholder}
+            {...inputProps}
+            onWheel={(e) => e.currentTarget.blur()}
+            {...InputProps}
+          />
+        </div>
         {endIcon && <span className={styles.endIcon}>{endIcon}</span>}
       </div>
       {error && (

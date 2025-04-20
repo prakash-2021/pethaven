@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mantine/core": "^7.17.4",
+    "@mantine/dropzone": "^7.17.4",
+    "@mantine/hooks": "^7.17.4",
     "@tailwindcss/vite": "^4.0.14",
     "@tanstack/react-query": "^5.71.10",
     "axios": "^1.8.4",

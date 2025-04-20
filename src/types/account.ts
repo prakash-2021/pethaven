@@ -5,6 +5,7 @@ export interface User {
   lastName: string;
   phoneNumber: string;
   dateOfBirth: string; // or Date, depending on how you plan to handle it
+  userId?: string;
 }
 
 export interface Login {

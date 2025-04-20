@@ -15,15 +15,16 @@ export const Header = () => {
         <div className={styles.header}>
           <nav className="flex items-center justify-between w-full">
             <div className="flex items-center gap-14">
-              <Link className="ph-text-large" to="/">
-                Home
-              </Link>
               <Link className="ph-text-large" to="/pets">
                 Get pet
               </Link>
+              <Link className="ph-text-large" to="/story">
+                Story
+              </Link>
             </div>
-
-            <img src="/Logo.svg" alt="logo" />
+            <Link to={"/"}>
+              <img src="/Logo.svg" alt="logo" />
+            </Link>
 
             <div className="flex items-center gap-14">
               {data ? (
