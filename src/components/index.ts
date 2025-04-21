@@ -7,3 +7,4 @@ export * from "./PetCardSlider";
 export * from "./QuizModal";
 export * from "./ScrollToTop";
 export * from "./Select";
+export * from "./StoryModal";

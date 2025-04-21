@@ -1,14 +1,17 @@
 import dayjs from "dayjs";
+import { useState } from "react";
 import { BiExit } from "react-icons/bi";
 import { FaImages } from "react-icons/fa6";
 import { MdOutlineMenuBook } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../../components";
+import { Button, StoryModal } from "../../components";
 import { useLocalStorageState } from "../../utils/use-localstorage";
 import { useGetProfile } from "../Signup/queries";
 
 export const Profile = () => {
   const token = useLocalStorageState("token");
+
+  const [showModal, setShowModal] = useState(false);
 
   const { data } = useGetProfile(token || "");
 
@@ -98,6 +101,7 @@ export const Profile = () => {
                 <span>Add new story</span>
               </div>
             }
+            onClick={() => setShowModal(true)}
             variant="secondary"
           />
         </div>
@@ -110,6 +114,11 @@ export const Profile = () => {
         </h2>
         <div className="grid grid-cols-12"></div>
       </div>
+
+      <StoryModal
+        handleClose={() => setShowModal(false)}
+        isModalOpen={showModal}
+      />
     </section>
   );
 };
