@@ -25,6 +25,7 @@
     "canvas-confetti": "^1.9.3",
     "dayjs": "^1.11.13",
     "gsap": "^3.12.7",
+    "html-react-parser": "^5.2.3",
     "keen-slider": "^6.8.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

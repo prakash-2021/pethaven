@@ -1,0 +1,28 @@
+.card {
+  .image {
+    transition: 0.4s scale ease-in-out;
+  }
+
+  .title {
+    width: fit-content;
+    background-image: linear-gradient(180deg, transparent 65%, #f1684970 0);
+    background-size: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.4s ease-in-out;
+    display: inline-block;
+    max-width: 100%; // or a fixed width like 320px if needed
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &:hover {
+    .image {
+      scale: 1.05;
+    }
+
+    .title {
+      background-size: 100% 100%;
+    }
+  }
+}

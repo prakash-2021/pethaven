@@ -8,6 +8,7 @@ import PetDetails from "./pages/PetDetails";
 import { Profile } from "./pages/Profile";
 import { SignUp } from "./pages/Signup";
 import Stories from "./pages/Stories";
+import { StoryDetail } from "./pages/StoryDetail";
 import { VerifyEmail } from "./pages/VerifyEmail";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/story" element={<Stories />} />
+          <Route path="/story/:id" element={<StoryDetail />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/profile" element={<Profile />} />
         </Route>

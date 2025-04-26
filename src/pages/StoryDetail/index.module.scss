@@ -1,0 +1,38 @@
+.storyContent {
+  line-height: 1.75;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1rem;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    color: #f16849;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem;
+    color: #f16849;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 2rem 0 1rem;
+    color: #f16849;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 0.7rem;
+    text-align: justify;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

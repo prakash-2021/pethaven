@@ -1,16 +1,7 @@
 import "keen-slider/keen-slider.min.css";
-import {
-  KeenSliderInstance,
-  KeenSliderPlugin,
-  useKeenSlider,
-} from "keen-slider/react";
-import {
-  MutableRefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useKeenSlider } from "keen-slider/react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { BiInfoCircle } from "react-icons/bi";
 import { Link, useParams } from "react-router-dom";
 import { useWindowSize } from "usehooks-ts";
 import {
@@ -25,42 +16,6 @@ import { useGetAllPets } from "../Pet/queries";
 import { useGetProfile } from "../Signup/queries";
 import { useGetPet } from "./queries";
 
-function ThumbnailPlugin(
-  mainRef: MutableRefObject<KeenSliderInstance | null>
-): KeenSliderPlugin {
-  return (slider) => {
-    function removeActive() {
-      slider.slides.forEach((slide) => {
-        slide?.classList.remove("border-2", "border-blue-500");
-      });
-    }
-
-    function addActive(idx: number) {
-      slider.slides[idx]?.classList.add("border-2", "border-blue-500");
-    }
-
-    function addClickEvents() {
-      slider.slides.forEach((slide, idx) => {
-        slide.addEventListener("click", () => {
-          if (mainRef.current) mainRef.current.moveToIdx(idx);
-        });
-      });
-    }
-
-    slider.on("created", () => {
-      if (!mainRef.current) return;
-      addActive(slider.track.details?.rel);
-      addClickEvents();
-      mainRef.current.on("animationStarted", (main) => {
-        removeActive();
-        const next = main.animator.targetIdx || 0;
-        addActive(main.track.absToRel(next));
-        slider.moveToIdx(Math.min(slider.track.details.maxIdx, next));
-      });
-    });
-  };
-}
-
 const PetDetails = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
@@ -69,16 +24,12 @@ const PetDetails = () => {
     slideChanged: (slider) => setCurrentIndex(slider.track.details?.rel),
   });
 
-  const [thumbnailRef] = useKeenSlider<HTMLDivElement>(
-    {
-      initial: 0,
-      slides: {
-        perView: 6,
-        spacing: 10,
-      },
+  const [thumbnailRef] = useKeenSlider<HTMLDivElement>({
+    slides: {
+      perView: 6,
+      spacing: 10,
     },
-    [ThumbnailPlugin(instanceRef)]
-  );
+  });
 
   // Auto-slide every 3 seconds
   useEffect(() => {
@@ -205,19 +156,35 @@ const PetDetails = () => {
               <div className="ph-text-x-large mb-4">{data?.age} Years Old</div>
               <p>{data?.healthStatus}</p>
 
-              {data?.adoptionStatus === "AVAILABLE" ? (
-                <Button
-                  label="Adopt Now"
-                  variant="primary"
-                  classNames="mt-10"
-                  onClick={() => setShowModal(true)}
-                />
+              {profile ? (
+                <>
+                  {data?.adoptionStatus === "AVAILABLE" ? (
+                    <Button
+                      label="Adopt Now"
+                      variant="primary"
+                      classNames="mt-10"
+                      onClick={() => setShowModal(true)}
+                    />
+                  ) : (
+                    <Button
+                      label="Adopted"
+                      variant="primary"
+                      classNames="mt-10 pointer-events-none cursor-not-allowed"
+                    />
+                  )}
+                </>
               ) : (
-                <Button
-                  label="Adopted"
-                  variant="primary"
-                  classNames="mt-10 pointer-events-none cursor-not-allowed"
-                />
+                <div>
+                  <div className="mt-8 mb-4 flex items-center gap-2">
+                    <BiInfoCircle color="#f16849" size={24} />
+                    <p className="text-[#f16849]">
+                      You must be log in to continue with adoption. 🐱
+                    </p>
+                  </div>
+                  <Link to={"/login"}>
+                    <Button label="Login" variant="primary" size="small" />
+                  </Link>
+                </div>
               )}
             </div>
           </div>

@@ -1,14 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { axios } from "../../lib";
-import { QuizQuestion } from "../../types/quiz";
+import { Story } from "../../types";
 
-// Fetch all pets
-export const useGetQuiz = () => {
+export const useGetStoryId = (userId: string) => {
   return useQuery({
-    queryKey: ["get-all-quiz"],
+    queryKey: ["get-story-id", { userId }],
     queryFn: async () => {
-      const { data } = await axios.get<QuizQuestion[]>("/quiz", {});
+      const { data } = await axios.get<{ stories: Story[] }>(
+        `/story/user/${userId}`
+      );
       return data;
     },
+    enabled: !!userId,
   });
 };

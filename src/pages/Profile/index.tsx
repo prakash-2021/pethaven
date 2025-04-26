@@ -1,12 +1,20 @@
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useKeenSlider } from "keen-slider/react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { BiExit } from "react-icons/bi";
 import { FaImages } from "react-icons/fa6";
 import { MdOutlineMenuBook } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { useWindowSize } from "usehooks-ts";
 import { Button, StoryModal } from "../../components";
 import { useLocalStorageState } from "../../utils/use-localstorage";
 import { useGetProfile } from "../Signup/queries";
+import { useGetStoryId } from "./queries";
+
+import relativeTime from "dayjs/plugin/relativeTime";
+import StoryCard from "../../components/StoryCard";
+
+dayjs.extend(relativeTime);
 
 export const Profile = () => {
   const token = useLocalStorageState("token");
@@ -17,9 +25,58 @@ export const Profile = () => {
 
   const navigate = useNavigate();
 
+  const { data: storyData } = useGetStoryId(data?.user.userId || "");
+
+  const [ref] = useKeenSlider<HTMLDivElement>({
+    slides: {
+      perView: 4,
+      spacing: 16,
+    },
+    renderMode: "performance",
+  });
+
+  const [containerPadding, setContainerPadding] = useState(0);
+
+  const [slideOffset, setSlideOffset] = useState(0);
+
+  const size = useWindowSize();
+
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleResize = useCallback(() => {
+    if (containerRef.current) {
+      setContainerPadding(
+        parseFloat(window.getComputedStyle(containerRef.current).paddingLeft)
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    const calcSlideOffset = () => {
+      const containerWidth = containerRef.current?.offsetWidth ?? 0;
+
+      if (size.width) {
+        const gap = (size.width - containerWidth) / 2 + containerPadding;
+        setSlideOffset(gap);
+      }
+    };
+
+    calcSlideOffset();
+  }, [size, containerPadding]);
+
+  useEffect(() => {
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [handleResize]);
+
   return (
     <section className="mt-14 mb-20">
-      <div className="ph-container mb-20">
+      <div className="ph-container mb-20" ref={containerRef}>
         <div className="grid grid-cols-12">
           <div className="col-span-6 col-start-3">
             <div className="grid grid-cols-2 gap-8 items-center">
@@ -91,28 +148,44 @@ export const Profile = () => {
         </div>
       </div>
 
-      <div className="ph-container mb-20">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="ph-heading--three text-[#F16849]">Your stories</h2>
-          <Button
-            label={
-              <div className="flex items-center gap-3">
-                <MdOutlineMenuBook size={20} />
-                <span>Add new story</span>
-              </div>
-            }
-            onClick={() => setShowModal(true)}
-            variant="secondary"
-          />
+      <div className="mb-20">
+        <div className="ph-container">
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="ph-heading--three text-[#F16849]">Your stories</h2>
+            <Button
+              label={
+                <div className="flex items-center gap-3">
+                  <MdOutlineMenuBook size={20} />
+                  <span>Add new story</span>
+                </div>
+              }
+              onClick={() => setShowModal(true)}
+              variant="secondary"
+            />
+          </div>
         </div>
-        <div className="grid grid-cols-12"></div>
+
+        {storyData && (
+          <div
+            ref={ref}
+            className="keen-slider"
+            style={{ paddingLeft: slideOffset, paddingRight: slideOffset }}
+          >
+            {storyData.stories.map((story) => (
+              <div key={story.id} className="keen-slider__slide">
+                <StoryCard story={story} />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
-      <div className="ph-container mb-20">
-        <h2 className="mb-8 ph-heading--three text-[#F16849]">
-          Recommended pets for you
-        </h2>
-        <div className="grid grid-cols-12"></div>
+      <div className="mb-20">
+        <div className="ph-container">
+          <h2 className="mb-8 ph-heading--three text-[#F16849]">
+            Recommended pets for you
+          </h2>
+        </div>
       </div>
 
       <StoryModal

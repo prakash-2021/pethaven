@@ -1,13 +1,6 @@
 @use "../../styles/main.scss";
 
 .faq {
-  padding: main.rem(40);
-  margin-bottom: main.rem(120);
-  font-family: "DM Sans", sans-serif;
-  border-radius: main.rem(24);
-  box-shadow: 0 10px 20px rgba(255, 0, 0, 0.151);
-  max-width: 800px;
-  margin-inline: auto;
 }
 
 .title {
@@ -25,9 +18,7 @@
 }
 
 .item {
-  background: #ffffff;
-  border-radius: main.rem(16);
-  border: 1px solid #f16849;
+  border-bottom: 1px solid #154c7e;
   overflow: hidden;
   transition: all 0.3s ease;
 }
@@ -45,16 +36,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: background 0.2s;
-
-  &:hover {
-    background-color: #f1684911;
-  }
 }
 
 .icon {
   font-size: main.rem(20);
-  color: #f16849;
+  color: #154c7e;
   transition: transform 0.3s ease;
 }
 
@@ -65,7 +51,7 @@
 .answerWrapper {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.4s ease;
+  transition: max-height 0.4s ease-in-out, padding 0.2s ease-in-out;
 }
 
 .open {
@@ -75,7 +61,6 @@
 
 .answer {
   padding: 0 main.rem(24);
-  color: #333;
   font-size: main.rem(18);
   line-height: 1.7;
 }
