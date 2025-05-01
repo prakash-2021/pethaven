@@ -6,6 +6,7 @@ export interface User {
   phoneNumber: string;
   dateOfBirth: string; // or Date, depending on how you plan to handle it
   userId?: string;
+  image?: string;
 }
 
 export interface Login {

@@ -5,6 +5,7 @@ export interface CreateStoryPayload {
   thumbnail: string;
   category: string; // e.g., "inspirational" | "lost"
   content: string;
+  status: "PENDING" | "APPROVED" | "REJECTED";
 }
 
 export interface Story {
@@ -15,6 +16,7 @@ export interface Story {
   content: string;
   category: string;
   createdAt: string; // ISO string format
+  status: string;
   updatedAt: string;
   userId: string;
   user: {

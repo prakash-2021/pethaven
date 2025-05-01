@@ -108,7 +108,7 @@ export const QuizModal = ({
 
       <div className={styles.progressBar} ref={progressBarRef} />
 
-      {data && activeStep < 8 && (
+      {!!data?.length && activeStep < 8 && (
         <div className="flex items-center justify-center w-full h-[80%]">
           <div className="max-w-[900px] w-full">
             <h2 className="text-center ph-text-x-large mb-10">

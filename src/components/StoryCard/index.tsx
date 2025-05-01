@@ -16,6 +16,7 @@ export type Story = {
   shortDescription: string;
   createdAt: string;
   user: User;
+  status: string;
 };
 
 type StoryCardProps = {
@@ -47,6 +48,15 @@ const StoryCard: React.FC<StoryCardProps> = ({ story }) => {
         </div>
         <span className="w-1 h-1 rounded-full bg-gray-400"></span>
         <span>{getShortRelativeTime(story.createdAt)}</span>
+
+        <span className="w-1 h-1 rounded-full bg-gray-400"></span>
+        <span>
+          {story.status === "APPROVED"
+            ? "Published"
+            : story.status === "Rejected"
+            ? "Rejected"
+            : "On Review"}
+        </span>
       </div>
 
       {/* Thumbnail */}

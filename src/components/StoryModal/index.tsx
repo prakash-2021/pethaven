@@ -90,6 +90,7 @@ export const StoryModal = ({
         userId: userData?.user.userId || "",
         thumbnail: data.secure_url || "",
         content: editor?.getHTML() || "",
+        status: "PENDING",
         ...form,
       });
     }

@@ -9,8 +9,9 @@ import { useWindowSize } from "usehooks-ts";
 import { Button, StoryModal } from "../../components";
 import { useLocalStorageState } from "../../utils/use-localstorage";
 import { useGetProfile } from "../Signup/queries";
-import { useGetStoryId } from "./queries";
+import { useGetStoryId, useUploadImage } from "./queries";
 
+import { FileInput, Modal } from "@mantine/core";
 import relativeTime from "dayjs/plugin/relativeTime";
 import StoryCard from "../../components/StoryCard";
 
@@ -25,15 +26,22 @@ export const Profile = () => {
 
   const navigate = useNavigate();
 
-  const { data: storyData } = useGetStoryId(data?.user.userId || "");
-
-  const [ref] = useKeenSlider<HTMLDivElement>({
+  const [ref, instanceRef] = useKeenSlider<HTMLDivElement>({
     slides: {
       perView: 4,
       spacing: 16,
     },
     renderMode: "performance",
   });
+
+  const { data: storyData } = useGetStoryId(data?.user.userId || "");
+
+  // Re-initialize / update slider on storyData update
+  useEffect(() => {
+    if (instanceRef.current) {
+      instanceRef.current.update();
+    }
+  }, [storyData]);
 
   const [containerPadding, setContainerPadding] = useState(0);
 
@@ -74,6 +82,31 @@ export const Profile = () => {
     };
   }, [handleResize]);
 
+  const [showUploadModal, setShowUploadModal] = useState(false);
+
+  const [imageFile, setImageFile] = useState<File | null>(null);
+
+  const {
+    mutate: uploadImage,
+    isPending,
+    isSuccess,
+  } = useUploadImage(data?.user.userId || "");
+
+  const handleUpload = () => {
+    if (imageFile) {
+      const formData = new FormData();
+      formData.append("image", imageFile);
+      uploadImage(formData);
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setShowUploadModal(false);
+      setImageFile(null);
+    }
+  }, [isSuccess]);
+
   return (
     <section className="mt-14 mb-20">
       <div className="ph-container mb-20" ref={containerRef}>
@@ -81,15 +114,17 @@ export const Profile = () => {
           <div className="col-span-6 col-start-3">
             <div className="grid grid-cols-2 gap-8 items-center">
               <div className="rounded-3xl overflow-hidden relative h-full">
-                {/* <figure className="ph-figure pt-[100%]">
-                  <img src="/dog.webp" alt="" className="ph-image" />
-                </figure> */}
-
-                <div className="bg-[#FFCDC1] absolute w-full h-full inset-0 flex items-center justify-center">
-                  <span className="text-9xl font-bold">
-                    {data?.user.firstName[0]}
-                  </span>
-                </div>
+                {data?.user.image ? (
+                  <figure className="ph-figure pt-[100%]">
+                    <img src={data?.user.image} alt="" className="ph-image" />
+                  </figure>
+                ) : (
+                  <div className="bg-[#FFCDC1] absolute w-full h-full inset-0 flex items-center justify-center">
+                    <span className="text-9xl font-bold">
+                      {data?.user.firstName[0]}
+                    </span>
+                  </div>
+                )}
               </div>
 
               <div>
@@ -127,8 +162,8 @@ export const Profile = () => {
                   </div>
                 }
                 variant="primary"
+                onClick={() => setShowUploadModal(true)}
               />
-
               <Button
                 label={
                   <div className="flex items-center gap-3">
@@ -192,6 +227,30 @@ export const Profile = () => {
         handleClose={() => setShowModal(false)}
         isModalOpen={showModal}
       />
+
+      <Modal
+        opened={showUploadModal}
+        onClose={() => setShowUploadModal(false)}
+        title="Upload your profile image"
+        centered
+      >
+        <FileInput
+          label="Select an image"
+          placeholder="Pick image"
+          accept="image/*"
+          value={imageFile}
+          onChange={(file) => setImageFile(file)}
+          required
+        />
+
+        <Button
+          label={isPending ? "Uploading" : "Upload"}
+          variant="primary"
+          classNames="w-full mt-8"
+          size="small"
+          onClick={handleUpload}
+        />
+      </Modal>
     </section>
   );
 };

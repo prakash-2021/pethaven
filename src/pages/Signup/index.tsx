@@ -31,9 +31,6 @@ export const SignUp = () => {
     if (!form.email.includes("@")) newErrors.email = "Enter a valid email";
     if (form.password.length < 6)
       newErrors.password = "Password must be at least 6 characters";
-    if (!form.phoneNumber.match(/^\d{7,15}$/))
-      newErrors.phoneNumber = "Enter a valid phone number";
-    if (!form.dateOfBirth) newErrors.dateOfBirth = "Date of birth is required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -101,7 +98,7 @@ export const SignUp = () => {
                   name="phoneNumber"
                   placeholder="Enter your phone number"
                   type="number"
-                  label="Phone number *"
+                  label="Phone number"
                   value={form.phoneNumber}
                   onChange={handleChange}
                   error={errors.phoneNumber}
@@ -110,7 +107,7 @@ export const SignUp = () => {
                   name="dateOfBirth"
                   placeholder="Enter your dob"
                   type="date"
-                  label="DOB *"
+                  label="DOB"
                   value={form.dateOfBirth}
                   onChange={handleChange}
                   error={errors.dateOfBirth}

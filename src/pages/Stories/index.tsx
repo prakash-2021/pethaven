@@ -60,7 +60,7 @@ const Stories = () => {
                 <SelectInput
                   options={[
                     { label: "Inspirational", value: "Inspiration" },
-                    { label: "Lost Pet", value: "LOST" },
+                    { label: "Lost Pet", value: "Lost" },
                   ]}
                   onChange={(e) => setCategory(e.target.value)}
                   value={category}

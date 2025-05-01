@@ -1,12 +1,17 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { axios } from "../../lib";
 import { CreateStoryPayload } from "../../types";
 
 export const useCreateStory = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: async (application: CreateStoryPayload) => {
       const { data } = await axios.post("/story", application);
       return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["get-story-id"] });
     },
   });
 };
