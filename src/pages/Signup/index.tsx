@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, ScrollToTop, TextInput } from "../../components";
+import { Button, CTA, ScrollToTop, TextInput } from "../../components";
 import { useSignUp } from "./queries";
 
 export const SignUp = () => {
@@ -39,20 +39,18 @@ export const SignUp = () => {
   const handleSubmit = () => {
     if (!validate()) return;
 
-    mutate(form);
+    mutate({ ...form, dateOfBirth: form.dateOfBirth || null });
   };
 
   return (
     <section className="mt-14 mb-20">
-      <div className="ph-container">
+      <div className="ph-container mb-20">
         <h1 className="ph-heading--three text-center mb-6">Sign Up</h1>
-        <div className="h-[30vh]">
-          <p className="text-center mb-8">
-            {isSuccess
-              ? "A verification link has been sent to your email address. Please verify your email."
-              : "Create your account here."}
-          </p>
-        </div>
+        <p className="text-center mb-8">
+          {isSuccess
+            ? "A verification link has been sent to your email address. Please verify your email."
+            : "Create your account here."}
+        </p>
 
         {!isSuccess && (
           <>
@@ -137,6 +135,8 @@ export const SignUp = () => {
           </>
         )}
       </div>
+
+      <CTA />
 
       <ScrollToTop />
     </section>

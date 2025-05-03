@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { axios } from "../../lib";
-import { Story } from "../../types";
+import { Application, Story } from "../../types";
 
 export const useGetStoryId = (userId: string) => {
   return useQuery({
@@ -8,6 +8,19 @@ export const useGetStoryId = (userId: string) => {
     queryFn: async () => {
       const { data } = await axios.get<{ stories: Story[] }>(
         `/story/user/${userId}`
+      );
+      return data;
+    },
+    enabled: !!userId,
+  });
+};
+
+export const useGetApplicationsById = (userId: string) => {
+  return useQuery({
+    queryKey: ["get-application-id", { userId }],
+    queryFn: async () => {
+      const { data } = await axios.get<Application[]>(
+        `/applications/${userId}`
       );
       return data;
     },

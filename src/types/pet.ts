@@ -30,3 +30,16 @@ export interface Pet {
   images: string[];
   petId: string;
 }
+
+export interface Application {
+  applicationId: string;
+  userId: string;
+  petId: string;
+  reason: string;
+  hasPetExperience: string;
+  homeType: string;
+  hasOtherPets: string;
+  status: string;
+  submittedAt: string; // ISO date string
+  pet: Pet;
+}

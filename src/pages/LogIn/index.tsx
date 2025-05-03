@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, ScrollToTop, TextInput } from "../../components";
+import { Button, CTA, ScrollToTop, TextInput } from "../../components";
 import { useLogin } from "../Signup/queries";
 
 export const Login = () => {
@@ -29,12 +29,12 @@ export const Login = () => {
 
   return (
     <section className="mt-14 mb-20">
-      <div className="ph-container">
+      <div className="ph-container mb-20">
         <h1 className="ph-heading--three text-center mb-6">Log In</h1>
         <p className="text-center mb-8">Log into your account here.</p>
 
         {isSuccess ? (
-          <h1 className="ph-heading--three text-center mb-6 h-[30vh]">
+          <h1 className="ph-heading--three text-center mb-6">
             You're in! Logged in successfully. 🙂
           </h1>
         ) : (
@@ -85,6 +85,8 @@ export const Login = () => {
           </>
         )}
       </div>
+
+      <CTA />
 
       <ScrollToTop />
     </section>

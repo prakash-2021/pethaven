@@ -3,9 +3,8 @@ import axios from "axios";
 const token = localStorage.getItem("token") || "";
 
 const instance = axios.create({
-  baseURL:
-    import.meta.env.VITE_API_BASE_URL ||
-    "https://pethaven-backend.onrender.com/api",
+  // baseURL: "https://pethaven-backend.onrender.com/api",
+  baseURL: "http://localhost:5000/api",
   headers: { Authorization: token },
 });
 

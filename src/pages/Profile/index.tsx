@@ -4,12 +4,16 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { BiExit } from "react-icons/bi";
 import { FaImages } from "react-icons/fa6";
 import { MdOutlineMenuBook } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useWindowSize } from "usehooks-ts";
-import { Button, StoryModal } from "../../components";
+import { Button, PetCardSlider, StoryModal } from "../../components";
 import { useLocalStorageState } from "../../utils/use-localstorage";
 import { useGetProfile } from "../Signup/queries";
-import { useGetStoryId, useUploadImage } from "./queries";
+import {
+  useGetApplicationsById,
+  useGetStoryId,
+  useUploadImage,
+} from "./queries";
 
 import { FileInput, Modal } from "@mantine/core";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -107,6 +111,25 @@ export const Profile = () => {
     }
   }, [isSuccess]);
 
+  const { data: applicationData } = useGetApplicationsById(
+    data?.user.userId || ""
+  );
+
+  const [refApplication, instanceRefApplication] =
+    useKeenSlider<HTMLDivElement>({
+      slides: {
+        perView: 4,
+        spacing: 16,
+      },
+      renderMode: "performance",
+    });
+
+  useEffect(() => {
+    if (instanceRefApplication.current) {
+      instanceRefApplication.current.update();
+    }
+  }, [applicationData]);
+
   return (
     <section className="mt-14 mb-20">
       <div className="ph-container mb-20" ref={containerRef}>
@@ -200,7 +223,7 @@ export const Profile = () => {
           </div>
         </div>
 
-        {storyData && (
+        {storyData?.stories.length ? (
           <div
             ref={ref}
             className="keen-slider"
@@ -211,6 +234,51 @@ export const Profile = () => {
                 <StoryCard story={story} />
               </div>
             ))}
+          </div>
+        ) : (
+          <div className="ph-container">
+            <p className="text-lg">You haven't submitted any story yet.</p>
+          </div>
+        )}
+      </div>
+
+      <div className="mb-20">
+        <div className="ph-container">
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="ph-heading--three text-[#F16849]">
+              Your Applications
+            </h2>
+          </div>
+        </div>
+
+        {applicationData?.length ? (
+          <div
+            ref={refApplication}
+            className="keen-slider"
+            style={{ paddingLeft: slideOffset, paddingRight: slideOffset }}
+          >
+            {applicationData.map((pet) => (
+              <div className="keen-slider__slide relative" key={pet.petId}>
+                <Link to={`/pets/${pet.pet.petId}`}>
+                  <PetCardSlider
+                    age={pet.pet.age}
+                    breed={pet.pet.breed}
+                    image={pet.pet.images[0]}
+                    name={pet.pet.name}
+                  />
+                </Link>
+
+                <span className="absolute top-2 left-2 bg-white p-1 px-2 rounded-md font-bold">
+                  {pet.status}
+                </span>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="ph-container">
+            <p className="text-lg">
+              You haven't submitted an adoption application yet.
+            </p>
           </div>
         )}
       </div>

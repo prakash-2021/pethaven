@@ -4,7 +4,7 @@ export interface User {
   firstName: string;
   lastName: string;
   phoneNumber: string;
-  dateOfBirth: string; // or Date, depending on how you plan to handle it
+  dateOfBirth: string | null; // or Date, depending on how you plan to handle it
   userId?: string;
   image?: string;
 }
