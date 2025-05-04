@@ -30,8 +30,8 @@ const Pet = () => {
           preferences. We’ll help you find your ideal furry friend in no time!
         </p>
 
-        <div className="mx-auto mb-12 flex items-center justify-center">
-          <div className="min-w-[30rem]">
+        <div className="mx-auto mb-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+          <div className="min-w-[20rem] sm:min-w-[30rem]">
             <TextInput
               placeholder="Search by name, breed or species"
               type="text"
@@ -52,7 +52,7 @@ const Pet = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {data?.pets.map((pet) => (
             <div className="flex items-center justify-center" key={pet.petId}>
               <PetCard

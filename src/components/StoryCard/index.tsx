@@ -33,23 +33,22 @@ const StoryCard: React.FC<StoryCardProps> = ({ story }) => {
       )}
     >
       {/* User Info */}
-      <div className="flex items-center gap-3 text-sm text-gray-600">
+      <div className="flex flex-wrap items-center gap-2 text-sm text-gray-600">
         <div className="flex items-center gap-2">
           <figure className="w-8 h-8 rounded-full overflow-hidden">
             <img
               src={story.thumbnail}
               alt="user"
-              className={"w-full h-full object-cover"}
+              className="w-full h-full object-cover"
             />
           </figure>
           <span className="font-medium underline text-gray-800">
             {story.user.firstName} {story.user.lastName}
           </span>
         </div>
-        <span className="w-1 h-1 rounded-full bg-gray-400"></span>
+        <span className="hidden sm:inline w-1 h-1 rounded-full bg-gray-400"></span>
         <span>{getShortRelativeTime(story.createdAt)}</span>
-
-        <span className="w-1 h-1 rounded-full bg-gray-400"></span>
+        <span className="hidden sm:inline w-1 h-1 rounded-full bg-gray-400"></span>
         <span>
           {story.status === "APPROVED"
             ? "Published"
@@ -60,7 +59,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ story }) => {
       </div>
 
       {/* Thumbnail */}
-      <figure className="w-full pt-[65%] relative rounded-sm overflow-hidden shadow-sm">
+      <figure className="w-full aspect-[4/3] relative rounded-sm overflow-hidden shadow-sm">
         <img
           src={story.thumbnail}
           alt="story"
@@ -76,12 +75,12 @@ const StoryCard: React.FC<StoryCardProps> = ({ story }) => {
         <h3
           className={twMerge(
             style.title,
-            "text-xl font-semibold text-gray-800 " //line-clamp-2 w-fit
+            "text-lg sm:text-xl font-semibold text-gray-800"
           )}
         >
           {story.title}
         </h3>
-        <p className={"text-gray-600 text-sm line-clamp-2"}>
+        <p className="text-gray-600 text-sm sm:text-base line-clamp-2">
           {story.shortDescription}
         </p>
       </div>

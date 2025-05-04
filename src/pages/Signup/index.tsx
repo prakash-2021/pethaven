@@ -55,7 +55,7 @@ export const SignUp = () => {
         {!isSuccess && (
           <>
             <div className="max-w-[800px] mx-auto mb-8">
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid lg:grid-cols-2 gap-6">
                 <TextInput
                   name="firstName"
                   placeholder="Enter your first name"

@@ -4,6 +4,7 @@ import { FaArrowRight } from "react-icons/fa6";
 import { PiDotsNineBold } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
+import { useMediaQuery } from "usehooks-ts";
 import { Button, CTA, PetCard, QuizModal, ScrollToTop } from "../../components";
 import { useGetAllPets } from "../Pet/queries";
 import styles from "./index.module.scss";
@@ -12,6 +13,8 @@ const Home = () => {
   const [showModal, setShowModal] = useState(false);
 
   const { data } = useGetAllPets(1, 6);
+
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
     <main className="mt-14">
@@ -46,31 +49,36 @@ const Home = () => {
 
       <section
         className={twMerge(
-          "mb-24 py-24 relative overflow-hidden",
+          "py-12 md:py-16 lg:py-24 mb-12 md:mb-16 lg:mb-24 relative overflow-hidden",
           styles.dogBg
         )}
       >
-        <div className="flex justify-center gap-24 mb-10">
-          {data?.pets.slice(0, 3).map((pet) => (
-            <PetCard
-              image={pet.images[0]}
-              name={pet.name}
-              key={pet.petId}
-              id={pet.petId}
-              status={pet.adoptionStatus}
-            />
-          ))}
-        </div>
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12 mb-6 md:mb-8 lg:mb-10">
+            {data?.pets.slice(0, isMobile ? 2 : 3).map((pet) => (
+              <div className="flex justify-center" key={pet.petId}>
+                <PetCard
+                  image={pet.images[0]}
+                  name={pet.name}
+                  id={pet.petId}
+                  status={pet.adoptionStatus}
+                />
+              </div>
+            ))}
+          </div>
 
-        <div className="flex justify-center gap-24">
-          {data?.pets.slice(3, 6).map((pet) => (
-            <PetCard
-              image={pet.images[0]}
-              name={pet.name}
-              key={pet.petId}
-              id={pet.petId}
-            />
-          ))}
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
+            {data?.pets.slice(isMobile ? 2 : 3, isMobile ? 4 : 6).map((pet) => (
+              <div className="flex justify-center" key={pet.petId}>
+                <PetCard
+                  image={pet.images[0]}
+                  name={pet.name}
+                  id={pet.petId}
+                  status={pet.adoptionStatus}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -86,22 +94,26 @@ const Home = () => {
             custom minymon.
           </p>
 
-          <div className="grid grid-cols-4 items-center gap-6 mb-16">
+          <div className="grid grid-cols-2 lg:grid-cols-4 items-center gap-6 mb-16">
             <figure className="flex items-center justify-center">
               <img src="/home/dog1.png" alt="" className="max-w-[300px]" />
             </figure>
-            <figure className="flex items-center justify-center">
-              <img src="/home/dog3.png" alt="" className="max-w-[230px]" />
+            <figure className=" items-center justify-center hidden lg:flex">
+              <img
+                src="/home/dog3.png"
+                alt=""
+                className="max-w-[230px] hidden lg:block"
+              />
             </figure>
             <figure className="flex items-center justify-center">
               <img src="/home/cat4.png" alt="" className="max-w-[180px]" />
             </figure>
-            <figure className="flex items-center justify-center">
+            <figure className=" items-center justify-center hidden lg:flex">
               <img src="/home/dog4.png" alt="" className="max-w-[130px]" />
             </figure>
           </div>
 
-          <div className="flex gap-10 justify-center">
+          <div className="flex gap-10 flex-col lg:flex-row justify-center">
             <Link to={"/pets"}>
               <Button
                 label={

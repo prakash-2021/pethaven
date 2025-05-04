@@ -32,8 +32,28 @@ export const Profile = () => {
 
   const [ref, instanceRef] = useKeenSlider<HTMLDivElement>({
     slides: {
-      perView: 4,
+      perView: 4, // Default number of slides per view
       spacing: 16,
+    },
+    breakpoints: {
+      "(min-width: 640px)": {
+        slides: {
+          perView: 2, // 2 slides for screens 640px and larger
+          spacing: 16,
+        },
+      },
+      "(min-width: 1024px)": {
+        slides: {
+          perView: 3, // 3 slides for screens 1024px and larger
+          spacing: 16,
+        },
+      },
+      "(min-width: 1280px)": {
+        slides: {
+          perView: 4, // 4 slides for screens 1280px and larger
+          spacing: 16,
+        },
+      },
     },
     renderMode: "performance",
   });
@@ -118,8 +138,28 @@ export const Profile = () => {
   const [refApplication, instanceRefApplication] =
     useKeenSlider<HTMLDivElement>({
       slides: {
-        perView: 4,
+        perView: 1.2, // Default number of slides per view
         spacing: 16,
+      },
+      breakpoints: {
+        "(min-width: 640px)": {
+          slides: {
+            perView: 2, // 2 slides for screens 640px and larger
+            spacing: 16,
+          },
+        },
+        "(min-width: 1024px)": {
+          slides: {
+            perView: 3, // 3 slides for screens 1024px and larger
+            spacing: 16,
+          },
+        },
+        "(min-width: 1280px)": {
+          slides: {
+            perView: 4, // 4 slides for screens 1280px and larger
+            spacing: 16,
+          },
+        },
       },
       renderMode: "performance",
     });
@@ -133,9 +173,9 @@ export const Profile = () => {
   return (
     <section className="mt-14 mb-20">
       <div className="ph-container mb-20" ref={containerRef}>
-        <div className="grid grid-cols-12">
-          <div className="col-span-6 col-start-3">
-            <div className="grid grid-cols-2 gap-8 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-12">
+          <div className="col-span-1 md:col-span-6 md:col-start-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center">
               <div className="rounded-3xl overflow-hidden relative h-full">
                 {data?.user.image ? (
                   <figure className="ph-figure pt-[100%]">
@@ -176,7 +216,7 @@ export const Profile = () => {
                 </div>
               </div>
             </div>
-            <div className="flex gap-8 w-full mt-8">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 w-full mt-8">
               <Button
                 label={
                   <div className="flex items-center gap-3">
@@ -268,7 +308,7 @@ export const Profile = () => {
                   />
                 </Link>
 
-                <span className="absolute top-2 left-2 bg-white p-1 px-2 rounded-md font-bold">
+                <span className="absolute top-2 left-2 bg-white p-1 rounded text-sm font-medium text-[#F16849]">
                   {pet.status}
                 </span>
               </div>
@@ -276,19 +316,9 @@ export const Profile = () => {
           </div>
         ) : (
           <div className="ph-container">
-            <p className="text-lg">
-              You haven't submitted an adoption application yet.
-            </p>
+            <p className="text-lg">You haven't applied for any pets yet.</p>
           </div>
         )}
-      </div>
-
-      <div className="mb-20">
-        <div className="ph-container">
-          <h2 className="mb-8 ph-heading--three text-[#F16849]">
-            Recommended pets for you
-          </h2>
-        </div>
       </div>
 
       <StoryModal
@@ -299,8 +329,7 @@ export const Profile = () => {
       <Modal
         opened={showUploadModal}
         onClose={() => setShowUploadModal(false)}
-        title="Upload your profile image"
-        centered
+        title="Upload a new image"
       >
         <FileInput
           label="Select an image"

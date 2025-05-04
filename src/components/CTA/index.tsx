@@ -40,7 +40,7 @@ export const CTA = () => {
 
   return (
     <div className="ph-container mb-20">
-      <div className="grid grid-cols-5 gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
         <div className="col-span-2">
           <h2 className={`ph-heading--three mb-7`}>
             Any questions? <br /> We got you

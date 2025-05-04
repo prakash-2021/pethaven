@@ -1,10 +1,8 @@
-@use "../../styles/main.scss";
-
 .button {
-  height: main.rem(60px);
-  padding: main.rem(18px) main.rem(26px);
+  height: 60px;
+  padding: 18px 26px;
   background-color: #f9f2ea;
-  border-radius: 8px;
+  border-radius: 0.5rem; // consistent with Tailwind rounding
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,17 +13,19 @@
   position: relative;
   top: 0;
   left: 0;
+  text-align: center;
+  text-decoration: none;
 
   span {
-    font-size: main.rem(18px);
+    font-size: clamp(14px, 1.5vw, 18px); // responsive font
     font-weight: 600;
-    // text-transform: uppercase;
     transition: all 0.2s ease-in-out;
+    color: #154c7e;
+    white-space: nowrap;
   }
 
   &:hover {
-    background-color: rgba(21, 76, 126, 0.05);
-    box-shadow: 5px 4px 0px #154c7e;
+    box-shadow: 5px 4px 0px #f16849;
     transform: translate(2px, 2px);
 
     span {
@@ -37,11 +37,24 @@
     box-shadow: 2px 2px 0px #154c7e;
     transform: translate(5px, 4px);
   }
+
+  @media (max-width: 480px) {
+    height: 48px;
+    padding: 12px 18px;
+    span {
+      font-size: 14px;
+    }
+  }
 }
 
 .small {
-  height: main.rem(40px);
-  padding: main.rem(12px) main.rem(20px);
+  height: 40px;
+  padding: 12px 20px;
+
+  @media (max-width: 480px) {
+    height: 36px;
+    padding: 10px 16px;
+  }
 }
 
 .secondary {
@@ -53,11 +66,37 @@
   }
 
   &:hover {
-    background-color: rgb(255, 233, 233);
-    box-shadow: 5px 4px 0px #f58970;
+    box-shadow: 5px 4px 0px #154c7e;
   }
 
   &:active {
     box-shadow: 2px 2px 0px #f16849;
+  }
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+
+  &:hover {
+    background-color: #f9f2ea;
+    box-shadow: 7px 6px 0px #154c7e;
+    transform: none;
+
+    span {
+      transform: none;
+    }
+  }
+
+  &:active {
+    box-shadow: 7px 6px 0px #154c7e;
+    transform: none;
+  }
+
+  &.secondary {
+    &:hover,
+    &:active {
+      box-shadow: 7px 6px 0px #f16849;
+    }
   }
 }

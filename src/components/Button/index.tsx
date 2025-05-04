@@ -1,4 +1,7 @@
-import React, { ReactNode } from "react";
+"use client";
+
+import type React from "react";
+import type { ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 import style from "./index.module.scss";
 
@@ -8,6 +11,7 @@ interface ButtonProps {
   label: ReactNode;
   onClick?: () => void;
   classNames?: string;
+  disabled?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -16,11 +20,19 @@ export const Button: React.FC<ButtonProps> = ({
   classNames,
   variant = "primary",
   size = "medium",
+  disabled = false,
 }) => {
   return (
     <button
       onClick={onClick}
-      className={twMerge(style.button, style[variant], style[size], classNames)}
+      disabled={disabled}
+      className={twMerge(
+        style.button,
+        style[variant],
+        style[size],
+        disabled && style.disabled,
+        classNames
+      )}
     >
       <span className="relative z-10">{label}</span>
     </button>

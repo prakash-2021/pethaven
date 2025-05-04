@@ -24,6 +24,7 @@
     "axios": "^1.8.4",
     "canvas-confetti": "^1.9.3",
     "dayjs": "^1.11.13",
+    "framer-motion": "^12.9.4",
     "gsap": "^3.12.7",
     "html-react-parser": "^5.2.3",
     "keen-slider": "^6.8.6",

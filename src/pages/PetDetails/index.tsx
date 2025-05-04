@@ -103,8 +103,8 @@ const PetDetails = () => {
     <main className="mt-14">
       <section className="mb-16">
         <div className="ph-container" ref={containerRef}>
-          <div className="grid grid-cols-6 gap-8">
-            <div className="col-span-3">
+          <div className="grid grid-cols-1 lg:grid-cols-6 gap-8">
+            <div className="col-span-1 lg:col-span-3">
               {/* Main Slider */}
               {data?.images && (
                 <div
@@ -127,7 +127,7 @@ const PetDetails = () => {
               {data?.images && (
                 <div
                   ref={thumbnailRef}
-                  className="keen-slider thumbnail mt-4 flex gap-2"
+                  className="keen-slider thumbnail mt-4 flex gap-2 overflow-x-auto"
                 >
                   {data?.images.map((pet, idx) => (
                     <div
@@ -150,7 +150,7 @@ const PetDetails = () => {
               )}
             </div>
 
-            <div className="col-span-3">
+            <div className="col-span-1 lg:col-span-3">
               <h2 className="ph-heading--three">{data?.name}</h2>
               <div className="mb-4 text-[#f16849]">{data?.breed}</div>
               <div className="ph-text-x-large mb-4">{data?.age} Years Old</div>

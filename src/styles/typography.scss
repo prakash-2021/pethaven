@@ -3,35 +3,83 @@
 
 .ph {
   &-heading--one {
-    font-size: functions.rem(84);
+    font-size: functions.rem(48);
     font-weight: 500;
     line-height: 130%;
+
+    @media (min-width: 768px) {
+      font-size: functions.rem(64);
+    }
+
+    @media (min-width: 1024px) {
+      font-size: functions.rem(84);
+    }
   }
 
   &-heading--three {
-    font-size: functions.rem(36);
+    font-size: functions.rem(24);
     font-weight: 700;
+
+    @media (min-width: 768px) {
+      font-size: functions.rem(30);
+    }
+
+    @media (min-width: 1024px) {
+      font-size: functions.rem(36);
+    }
   }
 
   &-text-large {
-    font-size: functions.rem(18);
+    font-size: functions.rem(14);
     font-weight: bold;
     letter-spacing: 2px;
     text-transform: uppercase;
+
+    @media (min-width: 768px) {
+      font-size: functions.rem(16);
+    }
+
+    @media (min-width: 1024px) {
+      font-size: functions.rem(18);
+    }
   }
 
   &-text-x-large {
-    font-size: functions.rem(20);
+    font-size: functions.rem(16);
     font-weight: bold;
+
+    @media (min-width: 768px) {
+      font-size: functions.rem(18);
+    }
+
+    @media (min-width: 1024px) {
+      font-size: functions.rem(20);
+    }
   }
 
   &-body--medium {
-    font-size: functions.rem(28);
+    font-size: functions.rem(20);
     font-weight: normal;
+
+    @media (min-width: 768px) {
+      font-size: functions.rem(24);
+    }
+
+    @media (min-width: 1024px) {
+      font-size: functions.rem(28);
+    }
   }
 
   &-body--small {
-    font-size: functions.rem(18);
+    font-size: functions.rem(16);
     font-weight: normal;
+
+    @media (min-width: 768px) {
+      font-size: functions.rem(17);
+    }
+
+    @media (min-width: 1024px) {
+      font-size: functions.rem(18);
+    }
   }
 }
