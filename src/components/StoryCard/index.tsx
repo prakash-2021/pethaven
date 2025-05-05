@@ -7,6 +7,7 @@ import style from "./index.module.scss";
 type User = {
   firstName: string;
   lastName: string;
+  image: string;
 };
 
 export type Story = {
@@ -37,7 +38,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ story }) => {
         <div className="flex items-center gap-2">
           <figure className="w-8 h-8 rounded-full overflow-hidden">
             <img
-              src={story.thumbnail}
+              src={story.user.image}
               alt="user"
               className="w-full h-full object-cover"
             />
