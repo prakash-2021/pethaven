@@ -10,8 +10,6 @@ export const StoryDetail = () => {
 
   const { data } = useGetStory(id || "");
 
-  console.log(data);
-
   return (
     <section className="mt-14 mb-20">
       <div className="ph-container">
