@@ -10,6 +10,8 @@ export const StoryDetail = () => {
 
   const { data } = useGetStory(id || "");
 
+  console.log(data);
+
   return (
     <section className="mt-14 mb-20">
       <div className="ph-container">
@@ -22,7 +24,7 @@ export const StoryDetail = () => {
               <div className="flex items-center gap-2">
                 <figure className="w-10 h-10 rounded-full overflow-hidden">
                   <img
-                    src={data?.thumbnail}
+                    src={data?.user.image}
                     alt="user"
                     className={"w-full h-full object-cover"}
                   />
