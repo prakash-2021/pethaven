@@ -8,11 +8,9 @@ const Layout = () => {
     <>
       <Header />
       <main>
-        <Outlet />{" "}
-        {/* This will render the child components (Home, About, etc.) */}
+        <Outlet />
       </main>
 
-      {/* <img src="/cute-dog.gif" alt="" className="fixed right-4 w-40 bottom-7" /> */}
       <ChatUI />
 
       <Footer />

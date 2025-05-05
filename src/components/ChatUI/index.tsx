@@ -54,7 +54,8 @@ export const ChatUI = () => {
           ...prevMessages,
           {
             id: (Date.now() + 1).toString(),
-            content: "How can I help you today?",
+            content:
+              "Thanks for contacting us! We’ll respond as soon as possible",
             sender: "admin",
             timestamp: new Date(),
           },

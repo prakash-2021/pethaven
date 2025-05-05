@@ -13,12 +13,12 @@ export const StoryDetail = () => {
   return (
     <section className="mt-14 mb-20">
       <div className="ph-container">
-        <div className="grid grid-cols-12 gap-8">
+        <div className="lg:grid grid-cols-12 gap-8">
           <div className="col-span-8 col-start-3">
             <h1 className="ph-heading--three mb-2">{data?.title}</h1>
             <p className="ph-body--medium mb-5">{data?.shortDescription}</p>
 
-            <div className="flex items-center gap-3 text-sm text-gray-600 mb-5">
+            <div className="flex items-center gap-2 lg:gap-3 text-sm text-gray-600 mb-5">
               <div className="flex items-center gap-2">
                 <figure className="w-10 h-10 rounded-full overflow-hidden">
                   <img
@@ -27,16 +27,16 @@ export const StoryDetail = () => {
                     className={"w-full h-full object-cover"}
                   />
                 </figure>
-                <span className="font-medium underline text-gray-800 text-xl">
+                <span className="font-medium underline text-gray-800 text-sm lg:text-xl">
                   {data?.user.firstName} {data?.user.lastName}
                 </span>
               </div>
               <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
-              <span className="text-xl">
+              <span className="text-sm lg:text-xl">
                 {getShortRelativeTime(data?.createdAt || "")}
               </span>
               <span className="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
-              <span className="text-xl">
+              <span className="text-sm lg:text-xl">
                 {data?.content &&
                   `${Math.ceil(
                     data.content.trim().split(/\s+/).length / 200

@@ -5,6 +5,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./global.css";
 import "./index.scss";
+import SmoothScrollProvider from "./Provider/SmoothScrollProvider.tsx";
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
@@ -13,9 +14,11 @@ const queryClient = new QueryClient({
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <MantineProvider>
-        <App />
-      </MantineProvider>
+      <SmoothScrollProvider>
+        <MantineProvider>
+          <App />
+        </MantineProvider>
+      </SmoothScrollProvider>
     </QueryClientProvider>
   </StrictMode>
 );

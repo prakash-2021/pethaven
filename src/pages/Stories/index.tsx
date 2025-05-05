@@ -45,9 +45,9 @@ const Stories = () => {
             story could inspire and help others in the petHaven community.
           </p>
 
-          <div className="mx-auto mb-12 flex items-center justify-between gap-5">
-            <div className="flex items-center gap-8">
-              <div className="min-w-[30rem]">
+          <div className="mx-auto mb-12 flex items-center flex-col lg:flex-row justify-between gap-5 w-full">
+            <div className="flex flex-col lg:flex-row items-center gap-8">
+              <div className="min-w-full lg:min-w-[30rem]">
                 <TextInput
                   placeholder="Search by name, breed or species"
                   type="text"
@@ -56,7 +56,7 @@ const Stories = () => {
                   value={search}
                 />
               </div>
-              <div className="min-w-[12rem]">
+              <div className="min-w-full lg:min-w-[12rem]">
                 <SelectInput
                   options={[
                     { label: "Inspirational", value: "Inspiration" },
@@ -95,7 +95,7 @@ const Stories = () => {
             )}
           </div>
 
-          <div className="grid grid-cols-3 gap-8 mb-10">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
             {storyData?.stories.length ? (
               storyData?.stories.map((story) => (
                 <StoryCard key={story.id} story={story} />
