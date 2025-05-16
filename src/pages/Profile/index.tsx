@@ -330,6 +330,7 @@ export const Profile = () => {
         opened={showUploadModal}
         onClose={() => setShowUploadModal(false)}
         title="Upload a new image"
+        centered
       >
         <FileInput
           label="Select an image"
