@@ -39,7 +39,7 @@ export const Header = () => {
             <div className={`${styles.links} ${menuOpen ? styles.open : ""}`}>
               <Link
                 className="ph-text-large"
-                to="/pets"
+                to="/about"
                 onClick={() => setMenuOpen(false)}
               >
                 About
